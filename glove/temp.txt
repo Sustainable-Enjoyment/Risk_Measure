@@ -1,1 +1,1 @@
-0
+This is a placeholder. Download glove.6B.300d.txt and place it here.
