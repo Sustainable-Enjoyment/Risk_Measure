@@ -1,0 +1,5 @@
+pandas
+openpyxl
+gensim
+# Optional: needed for scripts like scripts/run_measure.py
+nltk

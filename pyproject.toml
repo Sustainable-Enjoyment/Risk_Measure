@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=42"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "risk_measure"
+version = "0.1.0"
+description = "Tools to compute supply chain risk metrics"
+readme = "README.md"
+requires-python = ">=3.8"
+dependencies = [
+    "pandas",
+    "openpyxl",
+    "gensim",
+]
+
+[project.scripts]
+run-measure = "risk_measure.cli:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+    [tool.setuptools.package-data]
+    risk_measure = [
+        "data/expanded_sc_words.txt",
+        "data/expanded_risk_words.txt",
+    ]
+
+    [tool.setuptools.packages.find]
+    where = ["src"]

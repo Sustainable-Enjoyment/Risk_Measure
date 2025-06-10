@@ -1,0 +1,20 @@
+# Python bytecode
+__pycache__/
+*.py[cod]
+
+# Editor and OS files
+.DS_Store
+Thumbs.db
+Desktop.ini
+.vscode/
+.idea/
+*.swp
+*~
+
+# Data files and large artifacts
+*.xlsx
+*.xls
+*_tokens.json
+*.csv
+glove/
+bert-base-uncased/
