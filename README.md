@@ -1,6 +1,6 @@
 # Supply Chain Risk Measurement
 
-This project builds supply chain and risk vocabularies using word embeddings and applies them to earnings call transcripts. It provides a simple script to score each transcript based on the proximity of supply chain terms to risk-related terms.
+This project builds supply chain and risk vocabularies using word embeddings and applies them to earnings call transcripts,which provides a simple script to score each transcript based on the proximity of supply chain terms to risk-related terms.
 
 ## Usage
 
@@ -92,26 +92,25 @@ pytest
 
 # 供应链风险测度
 
-本项目使用词向量扩展供应链及风险词典，并对电话会议文本计算风险得分。示例脚本如下：
+本项目使用词向量扩展供应链及风险词典，并对电话会议文本计算风险得分。
+示例脚本如下：
 
 ```bash
 pip install -r requirements.txt
 pip install -e .
-# 只得当使用例子脚本时才需要 nltk
+# 当使用例子脚本时才需要 nltk
 pip install nltk
 python -m nltk.downloader stopwords punkt
 python scripts/run_measure.py examples/EarningCall_demo.xlsx --expand
 ```
-这两个 NLTK 命令仅对使用 `scripts/run_measure.py` 等助手脚本的您有用，同时会下载 `stopwords`和 `punkt`数据集。
-
 加上 `--expand` 参数后，会利用预训练的 GloVe 模型扩充词典，并把结果保存到 `scores.xlsx`。仓库中附带 `demo_57条.xls` 输入文件及其生成的示例结果 `meeting_scores_57.xlsx` 供参考。
 
 ### 数据集
 
 示例电话会议文本来自 S&P Capital IQ 的 Transcripts 数据库。请从 Capital IQ 导出所需会议记录并另存为 Excel 文件后再运行脚本。
 
-仓库中的 `glove/glove.6B.300d.txt` 只是占位符。若要使用完整模型，可从 [Stanford NLP 网站](https://nlp.stanford.edu/data/glove.6B.zip) 下载并解压，
-然后用真实的 `glove.6B.300d.txt` 覆盖该文件。项目中附带 `glove/sample_glove.txt` 供快速测试使用。
+仓库中的 `glove/glove.6B.300d.txt` 只是**占位符**。若要使用完整模型，可从 [Stanford NLP 网站](https://nlp.stanford.edu/data/glove.6B.zip) 下载并解压，
+请**用真实的 `glove.6B.300d.txt` 覆盖该文件**。项目中附带 `glove/sample_glove.txt` 供快速测试使用。
 ### BERT模型
 
 部分脚本需要在 `bert-base-uncased/` 目录下存放完整的预训练 BERT 模型，可使用 `transformers` 从 Hugging Face 下载后放入该目录。
