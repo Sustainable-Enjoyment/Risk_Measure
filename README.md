@@ -12,7 +12,7 @@ pip install nltk
 python -m nltk.downloader stopwords punkt
 run-measure examples/EarningCall_demo.xlsx --expand
 ```
-The last two commands are only needed if you plan to run `run-measure` or other tools that rely on NLTK. They also download the required datasets (`stopwords` and `punkt`).
+The last two commands are needed if you plan to run `run-measure` or other tools that rely on NLTK. They also download the required datasets (`stopwords` and `punkt`).
 
 ### NLTK data
 
