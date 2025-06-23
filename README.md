@@ -90,6 +90,63 @@ pip install -r requirements.txt pytest
 pytest
 ```
 
+## Future Improvements
+
+This project currently scores supply chain risk exposure by measuring the proximity between supply chain and risk-related terms. To enhance accuracy and contextual relevance, several methodological improvements are under consideration:
+
+### 1. Hybrid Word Importance Scoring
+
+Combine two complementary methods for word importance:
+
+* **Transformer Attention**: captures contextual salience of words.
+* **TextRank**: evaluates structural centrality in the document.
+
+Formula:
+
+$$
+Importance(w) = α · Attention(w) + (1 - α) · TextRank(w)
+$$
+
+
+
+This balances local semantic relevance and global structural influence. The hyperparameter α ∈ \[0, 1] can be tuned.
+
+
+### 2. Contextual Embedding Similarity
+
+Use contextualized embeddings (e.g., BERT, RoBERTa) instead of static ones like GloVe:
+
+$$
+Similarity(w, c) = cos(E_BERT(w), E_BERT(c))
+$$
+
+This enables term importance to adapt dynamically based on context, capturing industry-specific or ambiguous usage.
+
+
+
+### 3. Dependency-Aware Proximity
+
+Replace linear distance with syntactic dependency tree distance to compute proximity-based scores:
+
+$$
+ProximityScore(w_i, w_j) = 1 / (1 + λ · DepTreeDist(w_i, w_j))
+$$
+
+This allows better recognition of meaningful pairings like “supplier delay” or “inventory shortage” beyond word order.
+
+
+### 4. Sentence-Level Risk Aggregation
+
+Aggregate word-level importance into sentence-level risk intensity:
+
+$$
+SentenceRisk(s) = (1 / |s|) · Σ Importance(w) · Presence(w)
+$$
+
+This enables sentence-based ranking or highlighting of risk-heavy sentences in long transcripts.
+
+
+
 # 供应链风险测度
 
 本项目使用词向量扩展供应链及风险词典，并对电话会议文本计算风险得分。
@@ -114,6 +171,60 @@ python scripts/run_measure.py examples/EarningCall_demo.xlsx --expand
 ### BERT模型
 
 部分脚本需要在 `bert-base-uncased/` 目录下存放完整的预训练 BERT 模型，可使用 `transformers` 从 Hugging Face 下载后放入该目录。
+
+## 未来可扩展方向
+
+本项目当前通过计算供应链与风险词的距离来度量文本中的风险暴露程度。为了提升语义精度和上下文适应能力，后续可考虑如下改进：
+
+### 1. 混合词语重要性评分
+
+将两类互补的方法结合以提升词语显著性识别：
+
+* **Transformer 注意力**：捕捉词语在语境中的权重；
+* **TextRank 图算法**：识别文档中结构上“中心”的词语。
+
+数学表达为：
+
+$$
+Importance(w) = α · Attention(w) + (1 - α) · TextRank(w)
+$$
+
+其中 $α∈\[0,1]$ 为调节参数，可通过实验确定最优值。
+
+
+
+### 2. 上下文嵌入相似度
+
+用上下文相关的 BERT 嵌入替换静态词向量（如 GloVe）以计算词语与核心概念词的语义相关度：
+
+$$
+Similarity(w, c) = cos(E_BERT(w), E_BERT(c))
+$$
+
+相比静态词向量，这种方式能捕捉语境变化，适用于行业术语或语义多义的场景。
+
+
+
+### 3. 基于依存结构的词距权重
+
+用句法依存树上的路径长度替代线性距离：
+
+$$
+ProximityScore(w_i, w_j) = 1 / (1 + λ · DepTreeDist(w_i, w_j))
+$$
+
+能够更好识别语义上紧密相关的词对，如“供应商延误”、“库存短缺”等。
+
+
+### 4. 句子级风险聚合
+
+将词语重要性聚合为句子风险强度评分：
+
+$$
+SentenceRisk(s) = (1 / |s|) · Σ Importance(w) · Presence(w)
+$$
+
+适用于构建句子风险排序或高亮工具，提升会议文本风险定位的可读性。
 
 
 ## License
