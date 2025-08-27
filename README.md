@@ -10,9 +10,9 @@ The core algorithm quantifies risk exposure by measuring the co-occurrence of "s
 
 The risk score for each earnings call transcript (k) is calculated using the following formula:
 
-$$
-SCRisk_k = \frac{1}{N_k} \sum_{\forall i \in \text{SupplyChainWords}} \sum_{\forall j \in \text{RiskWords}} F_{i,k} \times \mathbf{1}[|p_i - p_j| \le 10]
-$$
+$SCRisk_k = \frac{1}{N_k} \sum_{\forall i \in \text{SupplyChainWords}} \sum_{\forall j \in \text{RiskWords}} F_{i,k} \times \mathbf{1}[|p_i - p_j| \le 10]$
+
+
 Where:
 * $SCRisk_k$: The final calculated supply chain risk score for transcript $k$.
 * $N_k$: A normalization factor, such as the total number of words in transcript $k$, to ensure scores are comparable across documents of different lengths.
@@ -142,7 +142,7 @@ By combining these, we aim to create a score that is sensitive to both local sem
 
 每个财报电话会议文本（k）的风险得分由以下公式计算：
 
-$$SCRisk_k = \frac{1}{N_k} \sum_{\forall i \in \text{供应链词汇}} \sum_{\forall j \in \text{风险词汇}} F_{i,k} \times \mathbf{1}[|p_i - p_j| \le 10]$$
+$SCRisk_k = \frac{1}{N_k} \sum_{\forall i \in \text{供应链词汇}} \sum_{\forall j \in \text{风险词汇}} F_{i,k} \times \mathbf{1}[|p_i - p_j| \le 10]$
 
 其中:
 * $SCRisk_k$: 文本 $k$ 的最终供应链风险得分。
